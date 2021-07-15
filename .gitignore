@@ -9,3 +9,5 @@ variable-fonts/fonts/Bahnschrift.ttf
 variable-fonts/fonts/Sitka.ttf
 variable-fonts/fonts/SitkaFV.ttf
 variable-fonts/styles/font-declarations.css
+/.vs
+/web.config
