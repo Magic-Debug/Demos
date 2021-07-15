@@ -1,20 +1,4 @@
-/**
- *  Thanks to Erik Kay and Mike Belshe from the Google Chrome engineering team who originally
- *  wrote the below sorting test. This test is a great way to experience the patterns across
- *  JavaScript timer resolutions and CPU efficiency. Plus it's fun to visualize algorithms
- *  and think back to Computer Science class. Thanks guys!
- *
- *  We made a few minor changes to showcase the proposed setImmediate API benefits.
- *  1) Run test in HTML5 Standards mode instead of Quirks mode.
- *  2) Added CSS unit descriptors for CSS compliance (and to eliminate error codepaths).
- *  3) Refactored callbacks to a single location to simplify learning about setImmediate.
- *  4) Added concept of setImmedate to the callbacks.
- *  5) Only run one test at a time which removes observer effect from second test.
- *  6) Use CSS3 transforms which removes layout/formatting observer effect.
- *  7) Implemented three hard coded tests for simplicity rather than dynamic values.
- *  8) Randomly generate during page load and then reuse the same array for all three tests.
- *  9) Changed the color scheme and styles of the test to match the IE TestDrive theme.
- **/
+
 (function () {
 	'use strict';
 	var manual = 0;
@@ -325,6 +309,7 @@
 		return bx.value - by.value;
 	};
 
+	//交换两个值
 	Sort.prototype.swap = function (x, y) {
 		var bx = this.bars[x];
 		var by = this.bars[y];
@@ -384,14 +369,14 @@
 		});
 	};
 
-	// QuickSort Implementation
+	// 快速排序
 	var sortQuick = function (sort, left, right) {
 		if (arguments.length === 1) {
 			left = 0;
 			right = sort.size - 1;
 		}
 		if (left < right) {
-			var pivot = left + Math.floor(Math.random() * (right - left));
+			let pivot = left + Math.floor(Math.random() * (right - left));
 			partition(sort, left, right, pivot);
 		}
 	};
