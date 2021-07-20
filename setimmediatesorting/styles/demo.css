@@ -24,7 +24,7 @@
 	padding: 0;
 	z-index: 2;
 	border-bottom: 0;
-	background: #107C10;
+	/*background: #107C10;*/
 	border-radius: 3px 3px 3px 3px;
 	box-sizing: content-box;
 }
@@ -35,7 +35,7 @@ button {
 
 /* These classes added in JS */
 .test-result--good {
-	color: #107C10;
+	color: green;
 }
 
 .test-result--neutral {

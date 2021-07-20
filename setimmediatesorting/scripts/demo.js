@@ -75,7 +75,8 @@
 				this.bars[r].value = tmp;
 			}
 		}
-
+		this.set = new Set(this.bars);
+		console.log(this.set);
 		this.barsOriginal = this.bars.slice(0);
 	};
 
@@ -87,7 +88,7 @@
 		this.lastTime = t;
 
 		var ops = 0;
-		var count = this.workQueue.length;
+		const count = this.workQueue.length;
 		if (count > 0) {
 			var func = this.workQueue.pop();
 			ops++;
@@ -274,7 +275,7 @@
 		var text = '';
 		var len = this.bars.length;
 		var heightMultiple = (graph.clientHeight - 20) / len;
-		var width = 3;
+		const width = 3;
 		var leftOffset = Math.round((graph.clientWidth - ((width + 1) * len)) / 2);
 		for (var i = 0; i < len; i++) {
 			var val = this.bars[i].value;
@@ -288,14 +289,14 @@
 		var nodes = document.getElementsByClassName('bar');
 		var j = 0;
 		for (i = 0; i < nodes.length; i++) {
-			var name = nodes[i].id;
+			let name = nodes[i].id;
 			if (name.indexOf(this.name) === 0) {
 				this.bars[j].elem = nodes[i];
 				j++;
 			}
 		}
 	};
-
+	//比较方法
 	Sort.prototype.compare = function (x, y) {
 		var bx = this.bars[x];
 		var by = this.bars[y];
@@ -315,14 +316,14 @@
 		var by = this.bars[y];
 		if (this.swapX !== x) {
 			if (this.swapX) {
-				this.swapX.elem.style.backgroundColor = '#107C10';
+				this.swapX.elem.style.backgroundColor = 'green';
 			}
 			bx.elem.style.backgroundColor = '#0037DA';
 			this.swapX = bx;
 		}
 		if (this.swapY !== y) {
 			if (this.swapY) {
-				this.swapY.elem.style.backgroundColor = '#107C10';
+				this.swapY.elem.style.backgroundColor = 'green';
 			}
 			by.elem.style.backgroundColor = '#F03A17';
 			this.swapY = by;
@@ -341,7 +342,9 @@
 		this.swaps++;
 	};
 
+	//递归调用 partitionStep
 	var partitionStep = function (sort, left, right, pivot, i, j) {
+		console.log("partitionStep", arguments);
 		if (i < right) {
 			if (sort.compare(i, right) <= 0) {
 				sort.swap(i, j);
