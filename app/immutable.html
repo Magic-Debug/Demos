@@ -1,0 +1,150 @@
+﻿<html>
+<head>
+    <script src="immutable.js" async></script>
+    <script src="rxjs.umd.js" async></script>
+    <script type="text/javascript">
+        let factorial = async (n) => n < 1 ? 1 : (n) * await factorial(n - 1);
+        let fibonacci = async (n) => 1 === n || 2 === n ? 1 : (await fibonacci(n - 1) + await fibonacci(n - 2));
+
+        let pow = (m, n) => {
+            let result = 1;
+            while (n--) {
+                result *= m;
+            }
+            return result;
+        }
+
+        let reverse = function (str) {
+            let len = str.length;
+            let result = '';
+            while (len--) {
+                result += str[len];
+            }
+            return result;
+        }
+
+        window.app = {};
+
+        window.onload = function () {
+            //race
+            Promise.all([fibonacci(4), factorial(5)])
+                .then((result) => {
+                    rxjs
+                        .of(result)
+                        .toPromise()
+                        .then(x => {
+                            console.log(`Promise.all fibonacci(n)=${x}`);
+                        });
+                }).catch((error) => {
+                    console.error(error);
+                }).finally(_ => {
+                    let r = reverse('angkor');
+                    rxjs.from(r).subscribe(
+                        (next) => {
+                            console.log(next);
+                        },
+                        (msg) => {
+                            console.error(msg);
+                        },
+                        () => {
+                            let p = pow.call(null, 2, 5);
+                            console.info(p);
+                        });
+                });
+
+            var is = Object.is(2, 3);
+            var weakMap = Object.create(WeakMap.prototype);
+
+            app.stack = Immutable.Stack();
+
+            app.seq = Immutable.Seq({ a: 1, b: 2, c: 3 });
+
+            app.list = Immutable.List([1, 2, 3, 4, 5, 6]);
+
+            app.repeat = Immutable.Repeat({ a: 1, b: 2, c: 3 }, 10);
+
+            app.set = Immutable.Set();
+            app.orderedSet = Immutable.OrderedSet();
+
+            app.map = Immutable.Map({ a: 1, b: 2, c: 3 });
+            app.orderedMap = Immutable.OrderedMap({ a: 1, b: 2, c: 3 });
+
+            console.dir(app);
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Stack</legend>
+        <div>
+            <button onclick="return app.stack.peek(100)">peek</button>
+            <button onclick="return app.stack.pop(100)">pop</button>
+            <button onclick="return app.stack.clear(100)">clear</button>
+            <button onclick="return app.stack.shift(100)">shift</button>
+            <button onclick="return app.stack.asImmutable(100)">asImmutable</button>
+            <button onclick="return app.stack.asMutable(100)">asMutable</button>
+            <button onclick="return app.stack.pushAll(100)">pushAll</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>List</legend>
+        <div>
+            <button onclick="return app.list.push(200)">push</button>
+            <button onclick="return app.list.delete(200)">delete</button>
+            <button onclick="return app.list.shift(200)">shift</button>
+            <button onclick="return app.list.remove(200)">remove</button>
+            <button onclick="return app.list.wasAltered(200)">wasAltered</button>
+            <button onclick="return app.list.setSize(200)">setSize</button>
+            <button onclick="return app.list.set(10,200)">set</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Set</legend>
+        <div>
+            <button onclick="return app.set.push(200)">push</button>
+            <button onclick="return app.set.delete(200)">delete</button>
+            <button onclick="return app.set.shift(200)">shift</button>
+            <button onclick="return app.set.remove(200)">remove</button>
+            <button onclick="return app.set.wasAltered(200)">wasAltered</button>
+            <button onclick="return app.set.union(200)">union</button>
+            <button onclick="return app.set.sort(() => { })">sort</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>OrderedSet</legend>
+        <div>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Map</legend>
+        <div>
+            <button onclick="return app.map.update(0,200)">update</button>
+            <button onclick="return app.map.sort()">sort</button>
+            <button onclick="return app.map.mergeIn(200)">mergeIn</button>
+            <button onclick="return app.map.get(2)">get</button>
+            <button onclick="return app.map.set(1,200)">set</button>
+            <button onclick="return app.map.remove(2)">remove</button>
+            <button onclick="return app.map.clear(20)">clear</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>OrderedMap</legend>
+        <div>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+    </fieldset>
+</body>
+</html>

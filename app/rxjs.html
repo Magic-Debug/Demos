@@ -1,0 +1,188 @@
+﻿<html>
+<head>
+    <script src="rxjs.umd.js"></script>
+    <script src="xRx.js"></script>
+    <script type="text/javascript">
+        const operators = rxjs.operators;
+        let keys = Object.keys(operators);
+        function saveLocation(event) {
+            let subject = new rxjs.Subject();
+            subject.subscribe(value => {
+                let scheduler = new rxjs.Scheduler(() => {
+                    let zip = rxjs.zip(10);
+                    debugger;
+                });
+                operators.throttleTime(1000, scheduler, {});
+            });
+            subject.next(event);
+            const xof = rxjs.of('one', 'two', 'three');
+            const from = rxjs.from([1, 2, 3]);
+            const combine = rxjs.combineLatest(xof, from);
+
+            return combine;
+        }
+        window.onload = function () {
+            //http://47.98.226.195/api/v3/social/tool/firewireCouriers?pageIndex=107&starLevel=0
+            rxjs.fromEvent(document, 'click')
+                .pipe(
+                    operators.mergeMap((e) => {
+                        let result = saveLocation({
+                            event: e,
+                            timestamp: Date.now()
+                        });
+                        return result;
+                    })
+                )
+                .subscribe(r => console.log('document Saved!', r));
+
+            rxjs.fromEvent(document.getElementById("partition"), 'click')
+                .pipe(
+                    operators.mergeMap((e) => {
+                    let result = rxjs.of(e);
+                        return result;
+                    })
+                )
+                .subscribe(r => console.log('button!', r));
+
+            const button = rxjs.fromEvent(document.querySelector('button'), 'click');
+            let scan = operators.scan(button, count => count + 1, 0);
+
+            rxjs.fromEvent(document.getElementById("pairs"), 'click')
+                .pipe(
+                    operators.mergeMap((e) => {
+                        let result = saveLocation({
+                            x: e.clientX,
+                            y: e.clientY,
+                            timestamp: Date.now()
+                        });
+                        return result;
+                    })
+                )
+                .subscribe(r => console.log('button!', r));
+
+
+            const observableKeys = rxjs.from(keys);
+            const keysmergeMap = observableKeys.pipe(
+                operators.mergeMap(x => rxjs.interval(10 * 1000)
+                    .pipe(operators.map(i => x + i)))
+            );
+            //keysmergeMap.subscribe(x => console.log(x));
+            //observableKeys.subscribe(x => console.log(x));
+
+            const numbers = rxjs.range(0, 9);
+            // numbers.subscribe(number => console.log(number));
+
+            const source = rxjs.from(keys);
+            const subject = new rxjs.Subject();
+            const multicasted = source.pipe(operators.multicast(subject));
+            multicasted.subscribe({
+                next: (v) => {
+                    //console.log(`observerA: ${v}`)
+                }
+            });
+            multicasted.connect();
+            const observable = rxjs.interval(10 * 1000);
+            const subscription = observable.subscribe(x => {
+                //console.log(x)
+            });
+            subscription.unsubscribe();
+
+            rxjs.of(1, 2, 3)
+                .pipe(
+                    operators.throttleTime(1000),
+                    operators.map(x => x + '!!!')
+                ).subscribe(count => console.log(`Clicked ${count} times`));
+
+            let timer = rxjs.timer(3000, 10 * 1000);
+            timer.subscribe(t => console.log(t));
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div>
+            <input placeholder="input  some key words" class="key" style="width:200px;" value="hello rxjs" />
+        </div>
+        <fieldset>
+            <legend>rxjs</legend>
+            <div>
+                <button class="btn" id="timer">timer</button>
+                <button class="btn" id="merge">merge</button>
+                <button class="btn" id="forkJoin">forkJoin</button>
+                <button class="btn" id="partition">partition</button>
+                <button class="btn" id="websocket">webSocket</button>
+                <button class="btn" id="fetch">fetch</button>
+                <button class="btn" id="defer">defer</button>
+                <button class="btn" id="from">from</button>
+                <button class="btn" id="pairs">pairs</button>
+                <button class="btn" id="race">race</button>
+                <button class="btn" id="interval">interval</button>
+                <button class="btn" id="zip">zip</button>
+                <button class="btn" id="timer">timer</button>
+                <button class="btn" id="using">using</button>
+                <button class="btn" id="range">range</button>
+                <button class="btn" id="fromEventPattern">fromEventPattern</button>
+                <button class="btn" id="fromEvent">fromEvent</button>
+                <button class="btn" id="generate">generate</button>
+                <button class="btn" id="of">of</button>
+                <button class="btn" id="concat">concat</button>
+                <button class="btn" id="pipe">pipe</button>
+                <button class="btn" id="combineLatest">combineLatest</button>
+                <button class="btn" id="bindCallback">bindCallback</button>
+
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>
+                Subject
+            </legend>
+            <div>
+                <button id="Subject">Subject</button>
+                <button id="ReplaySubject">ReplaySubject</button>
+                <button id="BehaviorSubject">BehaviorSubject</button>
+                <button id="AsyncSubject">AsyncSubject</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Scheduler</legend>
+            <div>
+                <button id="Scheduler">Scheduler</button>
+                <button id="VirtualTimeScheduler">VirtualTimeScheduler</button>
+                <button id="asyncScheduler">asyncScheduler</button>
+                <button id="asapScheduler">asapScheduler</button>
+                <button id="queueScheduler">queueScheduler</button>
+                <button id="animationFrameScheduler">queueScheduler</button>
+            </div>
+        </fieldset>
+        <div>
+            <textarea>
+                    "NotificationKind",
+                    "ajax",
+                    "Observable",
+                    "ConnectableObservable",
+                    "GroupedObservable",
+                    "observable",
+                    "VirtualAction",
+                    "Subscription",
+                    "Subscriber",
+                    "Notification",
+                    "noop",
+                    "identity",
+                    "ArgumentOutOfRangeError",
+                    "ObjectUnsubscribedError",
+                    "UnsubscriptionError",
+                    "bindNodeCallback",
+                    "empty",
+                    "iif",
+                    "never",
+                    "onErrorResumeNext",
+                    "throwError",
+                    "scheduled",
+                    "EMPTY",
+                    "NEVER",
+                    "config"
+                </textarea>
+        </div>
+    </div>
+</body>
+</html>

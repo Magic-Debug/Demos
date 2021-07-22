@@ -1,0 +1,30 @@
+<html>
+<head>
+  <script src="lodash.js"></script>
+  <script type="text/javascript">
+    window.onload = function () {
+      _.lastIndexOf([1, 2, 1, 2], 2);
+
+      _.union([2], [1, 2]);
+      debugger;
+      _.join(['a', 'b', 'c'], '~');
+
+      var array = [
+        { 'dir': 'left', 'code': 97 },
+        { 'dir': 'right', 'code': 100 }
+      ];
+
+      var shallow = _.clone(array);
+      var deep = _.cloneDeep(array);
+
+      _.keyBy(array, function (o) {
+        return String.fromCharCode(o.code);
+      });
+
+    }
+  </script>
+</head>
+<body>
+<button>OK</button>
+</body>
+</html>
