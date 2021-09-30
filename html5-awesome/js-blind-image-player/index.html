@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>纯JavaScript实现3D百叶窗图片切换动画DEMO演示</title>
+
+<link rel="stylesheet" href="css/reset.css" />
+<style type="text/css" id="css">
+	body{
+		background:black;
+	}
+	#List{
+		width:800px;
+		height:360px;
+		box-shadow:0 0 10px white;
+		margin:20px auto 0;
+		perspective:1500px;/* 站 在1000px之处看li	 */
+	}
+	#List li{
+		width:40px;
+		height:360px;
+		float:left;
+		position:relative;
+		opacity:1;
+		transform-style:preserve-3D;/* 	3D空间 */
+		transform-origin:center center -180px;
+	}
+	#List li a,#List li span{
+		position:absolute;
+		width:100%;
+		height:100%;
+	}
+	#List li span{
+		width:360px;
+		position:absolute;
+		height:100%;
+	}
+	#List li a:nth-child(1){
+		left:0;
+		top:0;
+		background:url("img/1.png");
+	}
+	#List li a:nth-child(2){
+		left:0;
+		top:-100%;
+		background:url("img/2.png");
+		transform-origin:bottom;
+		transform:rotateX(90deg);
+	}
+	#List li a:nth-child(3){
+		left:0;
+		top:0;
+		background:url("img/3.jpg");
+		transform:translateZ(-360px) rotateX(180deg);
+	}
+	#List li a:nth-child(4){
+		left:0;
+		top:100%;
+		background:url("img/4.jpg");
+		transform-origin:top;
+		transform:rotateX(-90deg);
+	}
+	#List:hover li{
+		transform:rotateX(360deg);
+	}
+	#btns{
+		width:200px;
+		margin:80px auto;
+	}
+	#btns li{
+		width:40px;
+		height:40px;
+		background:red;
+		color:white;
+		float:left;
+		text-align:center;
+		line-height:40px;
+		font-style:italic;
+		border-radius:50%;
+		margin:0 5px;
+		font-weight:bold;
+		cursor:pointer;
+	}
+	#btns li.active{
+		background:purple;
+		color:black;
+	}
+</style>
+
+<script type="text/javascript">
+	window.onload = function(){
+		var oList = document.getElementById("List");
+		var oCSS = document.getElementById("css");
+		var oBtn = document.getElementById("btns").children;
+		var iW = 40;
+		var shtml="";
+		var scss="";
+		var Lilength = oList.clientWidth / iW;
+		var iZindex= 0;
+		var iNow = 0;
+		var aLi;
+		var aLi = oList.children;
+		for (var i=0;i<Lilength;i++ )
+		{
+			i>Lilength/2?iZindex--:iZindex++;
+			shtml+='<li><a href="javascript:;"></a><a href="javascript:;"></a><a href="javascript:;"></a><a href="javascript:;"></a></li>';
+			scss += "#List li:nth-child("+(i+1)+") a{background-position:-"+(iW*i)+"px 0}";
+			scss += "#List li:nth-child("+(i+1)+"){z-index:"+iZindex+"}";
+		}
+		oList.innerHTML = shtml;
+		oCSS.innerHTML += scss;
+		for (var i=0;i<oBtn.length;i++ )
+		{
+			oBtn[i].index = i;
+			oBtn[i].onclick = function(){
+				oBtn[iNow].className = "";
+				for (var i=0;i<aLi.length;i++ )
+				{
+					aLi[i].style.transition = "0.8s "+i*50+"ms";
+					aLi[i].style.WebkitTransform="rotateX(-"+(this.index)*90+"deg)";
+				}
+				
+				iNow = this.index;
+				oBtn[iNow].className = "active";
+			}
+		}
+	}
+</script>
+
+</head>
+<body>
+<div style="text-align:center;clear:both;">
+<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+<script src="/follow.js" type="text/javascript"></script>
+</div>
+<ul id="List"></ul>
+
+<ol id="btns" class="clearfix">
+	<li class="active">1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+</ol>
+
+</body>
+</html>

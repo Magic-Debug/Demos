@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jQuery仪表盘指示器动画插件DEMO演示</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<!-- Syntax coloration -->
+    <link rel="stylesheet" type="text/css" href="_examples_data/prism/prism.css" />
+	<link rel="stylesheet" type="text/css" href="_examples_data/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/flightindicators.css" />
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="htmleaf-container">
+		<!--<div class="htmleaf-content bgcolor-3">-->
+		<div class="container">
+			
+
+		    <!-- Second example -->
+		    <div class="examples">
+		        <div>
+		            <span id="airspeed"></span>
+		            <span id="attitude"></span>
+		            <span id="altimeter"></span>            
+		        </div><div>
+		            <span id="turn_coordinator"></span>
+		            <span id="heading"></span>
+		            <span id="variometer"></span>
+		        </div>
+		    </div>
+		   
+		</div>
+		<div style="text-align:center;clear:both">
+		<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+		<script src="/follow.js" type="text/javascript"></script>
+		</div>
+	</div>
+	
+	<!-- Syntax color -->
+	<script src="_examples_data/prism/prism.js"></script>
+
+	<!-- Importing jQuery library -->
+	<script src="http://libs.useso.com/js/jquery/2.1.0/jquery.min.js"></script>
+
+	<!-- Importing the FlightIndicators library -->
+	<script src="js/jquery.flightindicators.js"></script>
+	<script type="text/javascript">
+	// First static example
+	var first_attitude = $.flightIndicator('#first_attitude', 'attitude', {size:350, roll:8, pitch:3, showBox : true});
+	// Dynamic examples
+	var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:-20, size:200, showBox : true});
+	var heading = $.flightIndicator('#heading', 'heading', {heading:150, showBox:true});
+	var variometer = $.flightIndicator('#variometer', 'variometer', {vario:-5, showBox:true});
+	var airspeed = $.flightIndicator('#airspeed', 'airspeed', {showBox: false});
+	var altimeter = $.flightIndicator('#altimeter', 'altimeter');
+	var turn_coordinator = $.flightIndicator('#turn_coordinator', 'turn_coordinator', {turn:0});
+
+	// Update at 20Hz
+	var increment = 0;
+	setInterval(function() {
+	    // Airspeed update
+	    airspeed.setAirSpeed(80+80*Math.sin(increment/10));
+
+	    // Attitude update
+	    attitude.setRoll(30*Math.sin(increment/10));
+	    attitude.setPitch(50*Math.sin(increment/20));
+
+	    // Altimeter update
+	    altimeter.setAltitude(10*increment);
+	    altimeter.setPressure(1000+3*Math.sin(increment/50));
+	    increment++;
+	    
+	    // TC update - note that the TC appears opposite the angle of the attitude indicator, as it mirrors the actual wing up/down position
+	    turn_coordinator.setTurn((30*Math.sin(increment/10))*-1);
+
+	    // Heading update
+	    heading.setHeading(increment);
+	    
+	    // Vario update
+	    variometer.setVario(2*Math.sin(increment/10));
+	}, 50);
+	</script>
+</body>
+</html>

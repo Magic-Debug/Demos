@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>HTML5/CSS3奔跑动画DEMO演示</title>
+
+  <style>
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+
+</style>
+
+    <style>
+body {
+  background: #fff4e0;
+}
+
+.slide {
+  background: #fff4e0;
+  position: relative;
+}
+.slide .stage {
+  position: relative;
+  height: 400px;
+  background: #c5e0dc;
+}
+.slide .stage .landscape {
+  background: url("landscape.png") no-repeat center top;
+  background-size: cover;
+  height: 248px;
+  position: absolute;
+  top: 185px;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+}
+.slide .stage .behind-trees {
+  background: url("behind-trees.png") no-repeat center top;
+  height: 103px;
+  position: absolute;
+  top: 120px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.slide .stage .behind-mountains {
+  background: url("behind-mountains.png") no-repeat center top;
+  height: 103px;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.slide .stage .foreground-trees {
+  background: url("foreground-trees.png") no-repeat center top;
+  height: 264px;
+  position: absolute;
+  top: 150px;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+}
+
+.kai {
+  height: 257px;
+  position: absolute;
+  width: 180px;
+  left: 50%;
+  margin-left: -90px;
+  top: 110px;
+  z-index: 3;
+  transform: scale(0);
+  background: url("kai_running.png");
+}
+.kai .eyes:after, .kai .eyes:before {
+  height: 8px;
+  width: 5px;
+  background: #1a181b;
+  top: 100px;
+  content: "";
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+}
+.kai .eyes:after {
+  right: 70px;
+}
+.kai .eyes:before {
+  left: 70px;
+}
+.kai.animate {
+  animation: animate 0.75s steps(19) infinite;
+}
+.kai.animate .eyes {
+  position: relative;
+  animation: eyes_running .75s reverse infinite;
+}
+.kai.animate .eyes:before, .kai.animate .eyes:after {
+  animation: eyes_blink 5s .2s alternate infinite linear;
+}
+
+@keyframes animate {
+  to {
+    background-position: -3420px;
+  }
+}
+@keyframes eyes_blink {
+  0% {
+    height: 8px;
+    top: 100px;
+  }
+
+  10% {
+    height: 8px;
+    top: 100px;
+  }
+
+  11% {
+    height: 2px;
+    top: 103px;
+  }
+
+  13% {
+    height: 2px;
+    top: 103px;
+  }
+
+  14% {
+    height: 8px;
+    top: 100px;
+  }
+
+  30% {
+    height: 8px;
+    top: 100px;
+  }
+
+  34% {
+    height: 8px;
+    top: 100px;
+  }
+
+  36% {
+    height: 2px;
+    top: 103px;
+  }
+
+  38% {
+    height: 8px;
+    top: 100px;
+  }
+
+  40% {
+    height: 2px;
+    top: 103px;
+  }
+
+  42% {
+    height: 8px;
+    top: 100px;
+  }
+
+  99.9999% {
+    height: 8px;
+    top: 100px;
+  }
+}
+@keyframes eyes_running {
+  0% {
+    top: 20px;
+  }
+
+  22% {
+    top: 9px;
+  }
+
+  46% {
+    top: 17px;
+  }
+
+  72% {
+    top: 9px;
+  }
+
+  100% {
+    top: 20px;
+  }
+}
+
+</style>
+
+    <script src="js/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class='kai animate' id='running'>
+  <div class='eyes'></div>
+</div>
+<div class='slide'>
+  <div class='stage'>
+    <div class='foreground-trees'></div>
+    <div class='landscape'></div>
+    <div class='behind-trees'></div>
+    <div class='behind-mountains'></div>
+  </div>
+</div>
+
+  <script src='js/jquery.js'></script>
+  <script src='js/jquery.transform.js'></script>
+
+  <script src="js/index.js"></script>
+<div style="text-align:center;clear:both;margin-top:100px">
+<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+<script src="/follow.js" type="text/javascript"></script>
+</div>
+</body>
+
+</html>

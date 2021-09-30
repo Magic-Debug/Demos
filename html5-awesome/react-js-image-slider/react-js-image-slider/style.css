@@ -1,0 +1,113 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  background: #000;
+}
+
+.distorted-gallery {
+  --transition-time: 800;
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+.distorted-gallery__image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46.6666666667vh;
+  height: 70vh;
+  margin-left: -23.3333333333vh;
+  margin-top: -35vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 50%;
+     object-position: 50% 50%;
+  opacity: 0;
+  transition-timing-function: ease-in-out;
+  will-change: transform, opacity;
+}
+.distorted-gallery__image.s--left {
+  transform-origin: 0 50%;
+  transform: rotateX(-8deg) rotateY(-35deg) translate3d(-170%, 0, -30px) scale(2, 0.7);
+}
+.distorted-gallery__image.s--right {
+  transform-origin: 100% 50%;
+  transform: rotateX(8deg) rotateY(35deg) translate3d(170%, 0, -30px) scale(2, 0.7);
+}
+.distorted-gallery__image.s--prev {
+  opacity: 0;
+  transition: all 560ms;
+}
+.distorted-gallery__image.s--prev-left {
+  transform-origin: 0 100%;
+  transform: rotate(-5deg) translate3d(-50%, 30%, 0);
+}
+.distorted-gallery__image.s--prev-right {
+  transform-origin: 100% 100%;
+  transform: rotate(5deg) translate3d(50%, 30%, 0);
+}
+.distorted-gallery__image.s--active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: transform 640ms 160ms cubic-bezier(0.97, 0.13, 0.34, 1.15), opacity 320ms 160ms ease-in;
+}
+.distorted-gallery.s--no-transition .distorted-gallery__image {
+  transition: all 0s 0s;
+}
+.distorted-gallery__control {
+  z-index: 100;
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+.distorted-gallery__control:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 2px solid #000;
+  border-bottom: none;
+  border-right: none;
+  transform: translateX(5px) rotate(-45deg);
+}
+.distorted-gallery__control--right {
+  left: auto;
+  right: 50px;
+}
+.distorted-gallery__control--right:before {
+  transform: translateX(-5px) rotate(135deg);
+}
+
+.footer-link {
+  z-index: 100;
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  font-size: 16px;
+  color: #fff;
+}
+.footer-link img {
+  width: 32px;
+  vertical-align: top;
+}
+.footer-link--twitter {
+  left: auto;
+  right: 5px;
+}

@@ -1,0 +1,43 @@
+html{
+    height:100%;
+}
+body{
+    background-color:#bfc51e;
+    margin:0px;
+    text-align: center;
+}
+sup{
+    font-size: 55%;
+}
+span{
+    display:inline-block;
+    position:relative;
+    margin:10px;
+    padding:4px;
+    width:350px;
+    line-height: 18px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    cursor: default;
+    background-color:#ee0000;
+    border-radius:5px;
+    font: 26px verdana;
+    color: #fff; 
+    text-align: center;
+}
+p {
+    margin: 5px;
+}
+
+ul {
+    padding-left:10px; 
+    list-style:none;
+    list-style-type: none;
+}
+
+li {
+    text-align:left;
+    padding-top:5px;
+}

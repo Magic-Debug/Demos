@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>纯CSS3绘制的旺仔头像动画DEMO演示</title>
+</head>
+
+<style>
+*{ margin:0; padding:0;}
+.container{ width:900px; height:710px; background:#f00; margin:0 auto; overflow:hidden;}
+.wrap-hair{ position:relative; width:500px; margin:0 auto; z-index:100;}
+.hair-a{ width:500px; height:200px;border-radius:50%; border-width:80px;  border-style:solid; border-bottom:none; border-left:none; border-right:none; position:absolute; top:100px; left:0;}
+.hair-b{ width:300px; height:300px; border-radius:50%; border-width:80px; border-color:#000; border-style:solid; border-bottom:none; border-left:none;
+border-right:none; position:absolute; top:95px; left:100px;}
+.hair-c{
+	width:200px; height:170px; border-width:55px; border-radius:50% 0; border-style:solid; border-color:#000; border-bottom:none; border-right:none; border-left:none;position:absolute; top:50px; left:55px; 
+	transform:rotate(35deg);
+	-moz-transform:rotate(35deg); 
+	-webkit-transform:rotate(35deg); 
+	
+	animation:b 6s infinite;
+	-moz-animation:b 6s infinite;
+	-webkit-animation:b 6s infinite;
+}
+.hair-c:hover{
+	top:60px;
+	
+	transform:rotate(20deg);
+	-moz-transform:rotate(20deg);
+	-webkit-transform:rotate(20deg);
+}
+.hair-d{
+	width:200px; height:170px; border-width:55px; border-radius:0 50%; border-style:solid; border-color:#000; border-bottom:none; border-right:none; border-left:none; position:absolute; top:45px; left:250px;
+	
+	transform:rotate(-35deg); 
+	-webkit-transform:rotate(-35deg); 
+	-moz-transform:rotate(-35deg); 
+	
+	animation:c 5s 1s infinite;
+	-webkit-animation:c 5s 1s infinite;
+	-moz-animation:c 5s 1s infinite;
+}
+.hair-d:hover{
+	top:55px;
+	
+	transform:rotate(-23deg);
+	-moz-transform:rotate(-23deg);
+	-webkit-transform:rotate(-23deg);
+}
+.wrap-face{ width:400px; height:450px; border-radius:50%; border:20px solid #000; margin-left:230px; position:relative; top:100px; background:#ffe8d8;}
+.eye1,.eye2{ width:75px; height:110px; border-radius:46%; background:#fff; border:18px solid #000; margin-left:120px; position:absolute; top:100px; left:-50px;}
+.eye2{top:100px; left:95px;}
+.inner-eye{
+	width:40px; height:80px; background:#000; border-radius:50%; margin-left:40px; margin-top:10px;
+	
+	animation:a 2s ease-out;
+	-moz-animation:a 2s ease-out;
+	-webkit-animation:a 2s ease-out;
+}
+.nose{ width:50px; height:50px; border:6px solid #000; border-radius:50%; position:absolute; top:220px; left:170px;}
+.mouth{ width:220px; height:170px; border-bottom:60px solid #000; margin-top:30px; border-radius:50%; margin-top:140px; margin-left:90px; position:relative;}
+.circle1,.circle2{
+	width:18px; height:70px; border-radius:10px 10px 0 0; background:#000; position:absolute; top:110px; left:0px;
+	
+	transform:rotate(-34deg);
+	-moz-transform:rotate(-34deg);
+	-webkit-transform:rotate(-34deg);
+}
+.circle2{
+	left:201px;
+
+	transform:rotate(34deg);
+	-moz-transform:rotate(34deg);
+	-webkit-transform:rotate(34deg);
+}
+.circle3{ width:193px; height:220px; border-radius:50%; border-bottom:50px solid #000; position:absolute; top:0px; left:14px;}
+.heart1{
+	width:60px; height:95px; border-top-left-radius:50%; border-top-right-radius:50%; background:#ff0000; position:absolute;left:70px; top:165px;
+	
+	transform:rotate(-45deg);
+	-moz-transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
+}
+.heart2{
+	width:60px; height:95px; border-top-left-radius:50%; border-top-right-radius:50%; background:#ff0000; position:absolute; left:96px; top:165px;
+	
+	transform:rotate(45deg);
+	-moz-transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+}
+.ear1,.ear2{
+	width:65px; height:60px; border-radius:50px 0 0 50px; background:#ffe7dd; border:20px solid #000; border-right:none; position:absolute; top:160px; left:-82px;
+	
+	transform:rotate(2deg);
+	-moz-transform:rotate(2deg);
+	-webkit-transform:rotate(2deg);
+}
+.ear2{
+	left:396px;
+	
+	transform:rotate(178deg);
+	-moz-transform:rotate(178deg);
+	-webkit-transform:rotate(178deg);
+}
+.shy1,.shy2{
+	width:65px; height:65px; background:#ff3b5a; border-radius:50%; filter: blur(5px); position:absolute; top:240px; left:10px;
+	
+	background: radial-gradient(circle, #ff3454,#ffbfb9);
+	
+	filter: blur(5px);	
+	-moz-filter: blur(5px);	
+	-webkit-filter: blur(5px);	
+}
+.shy2{  left:330px; }
+.bodys{  width:500px; height:250px; border-radius:270px 270px 0 0; background:#ffe6dd; border:20px solid #000; border-bottom:none; margin-left:185px; margin-top:30px; }
+.clothes{ width:180px; height:0; border-bottom:143px solid #000; border-left:60px solid transparent; border-right:60px solid transparent; margin-left:96px; margin-top:28px; }
+.clo-a{ width:150px; height:0;  border-bottom:143px solid #f5f728; border-left:60px solid transparent; border-right:60px solid transparent; margin-left:-45px; }
+.clo-b{width:125px; height:0;  border-bottom:130px solid #000; border-left:50px solid transparent; border-right:50px solid transparent; margin-left:-37px; border-radius:5px;}
+.clo-c{width:85px; height:0;  border-bottom:80px solid #fde7dc; border-left:35px solid transparent; border-right:35px solid transparent; position:relative; top:28px; left:-16px;  }
+@keyframes a{
+	0%{margin-left:40px;}
+	30%{  margin-left:20px;}
+	100%{ margin-left:40px;}
+	}
+@keyframes b{
+	0%{
+		transform:rotate(35deg);
+		-moz-transform:rotate(35deg);
+		-webkit-transform:rotate(35deg);
+		
+		top:50px;
+	}
+	30%{
+		transform:rotate(20deg);
+		-moz-transform:rotate(20deg);
+		-webkit-transform:rotate(20deg);
+		
+		top:60px;
+	}
+	100%{
+		transform:rotate(35deg);
+		-moz-transform:rotate(35deg);
+		-webkit-transform:rotate(35deg);
+		
+		top:50px;
+		}
+	}
+@keyframes c{
+	0%{
+		transform:rotate(-35deg);
+		-moz-transform:rotate(-35deg);
+		-webkit-transform:rotate(-35deg);
+		
+		top:45px;
+	}
+	30%{
+		transform:rotate(-23deg);
+		-moz-transform:rotate(-23deg);
+		-webkit-transform:rotate(-23deg);
+		
+		top:55px;
+	}
+	100%{
+		transform:rotate(-35deg);
+		-moz-transform:rotate(-35deg);
+		-webkit-transform:rotate(-35deg);
+		
+		top:45px;
+	}
+	}
+</style>
+
+<body>
+<div style="text-align:center;clear:both">
+<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+<script src="/follow.js" type="text/javascript"></script>
+</div>
+<div class="container">
+	<div class="wrap-hair">
+    	<div class="hair-a"></div>
+        <div class="hair-b"></div>
+        <div class="hair-c"></div>
+        <div class="hair-d"></div>
+    </div>
+    <div class="wrap-face">
+    	<div class="eye1">
+        	<div class="inner-eye"></div>
+        </div>
+        <div class="eye2">
+        	<div class="inner-eye"></div>
+        </div>
+        <div class="nose"></div>
+        <div class="mouth">
+        	 <div class="circle3"></div>
+        	<div class="circle1"></div>
+            <div class="circle2"></div>
+           	<div class="heart1"></div>
+            <div class="heart2"></div>
+        </div>
+        <div class="ear1"></div>
+        <div class="ear2"></div>
+        <div class="shy1"></div>
+        <div class="shy2"></div>
+    </div>
+    <div class="bodys">
+    	<div class="clothes">
+        	<div class="clo-a">
+            	<div class="clo-b">
+                	<div class="clo-c"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
